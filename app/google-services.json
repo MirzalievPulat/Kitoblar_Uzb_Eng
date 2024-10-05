@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "606250221659",
+    "project_id": "bozor-d2cfd",
+    "storage_bucket": "bozor-d2cfd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606250221659:android:4ad7a82cf0076c37357f7e",
+        "android_client_info": {
+          "package_name": "uz.frodo.kitoblaruzb_eng"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIv9wje8IoV29XnLuVxq8ZzWsUjYYYWko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606250221659:android:bd948e0e65899924357f7e",
+        "android_client_info": {
+          "package_name": "uz.gita.bookee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIv9wje8IoV29XnLuVxq8ZzWsUjYYYWko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606250221659:android:45ee55964bc67730357f7e",
+        "android_client_info": {
+          "package_name": "uz.gita.bozor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIv9wje8IoV29XnLuVxq8ZzWsUjYYYWko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

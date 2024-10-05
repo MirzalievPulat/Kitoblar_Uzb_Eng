@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Kitoblar (Uzb-Eng)</string>
+    <string name="txt_books">kitoblar</string>
+    <string name="txt_welcome">Welcome</string>
+    <string name="txt_welcome_info">Thousand of collections are waiting for you.</string>
+    <string name="txt_welcome_info2">Find your soul by exploring our thousands of collections from our library.</string>
+    <string name="txt_sign_up">Sign Up</string>
+    <string name="txt_skip">Skip</string>
+    <string name="txt_categories">Categories</string>
+    <string name="txt_recommended_for_you">Recommended for you</string>
+    <string name="txt_best_seller">Best seller</string>
+    <string name="txt_all">All</string>
+    <string name="txt_play_audio">Play Audio</string>
+    <string name="txt_read_book">Read book</string>
+    <string name="txt_summary">Summary</string>
+    <string name="txt_lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="txt_next">Next</string>
+</resources>
