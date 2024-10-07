@@ -1,5 +1,6 @@
 package uz.frodo.kitoblaruzb_eng.ui.theme
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -38,11 +39,13 @@ val Typography = Typography(
     ),
 
 
+
+
+
     headlineLarge = TextStyle(
         fontFamily = latoFont,
         fontWeight = FontWeight.Light,
         fontSize = 48.sp,
-        color = Color.Black
     ),
 
     headlineSmall = TextStyle(

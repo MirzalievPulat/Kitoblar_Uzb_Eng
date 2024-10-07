@@ -10,6 +10,7 @@ interface WelcomeContract {
 
     data class UIState(
         val isLoading: Boolean = false,
+        val isDarkTheme:Boolean = false
     )
 
     sealed interface SideEffect {

@@ -37,8 +37,8 @@ class AllBooksVM @Inject constructor(
 
     override fun onEventDispatcher(intent: AllBooksContract.Intent) = intent {
         when(intent){
-            AllBooksContract.Intent.Start->{
-                directions.moveToBookInfo()
+            is AllBooksContract.Intent.BookClick->{
+                directions.moveToBookInfo(intent.book)
             }
             is AllBooksContract.Intent.CategoryClick->{
                 repository.getCategories(intent.category)

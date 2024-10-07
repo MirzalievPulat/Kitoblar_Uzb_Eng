@@ -11,8 +11,8 @@ interface AllBooksContract {
 
     data class UIState(
         val isLoading: Boolean = false,
-        val allBooks:List<Book> = emptyList(),
-        val categoryBook:List<Book> = emptyList()
+        val allBooks:List<Book> = listOf(Book(rating = 5f),Book(rating = 5f),Book(rating = 5f),Book(),Book(),Book()),
+        val categoryBook:List<Book> = listOf(Book(),Book(),Book(),Book(),Book(),Book())
     )
 
     sealed interface SideEffect {
@@ -20,11 +20,11 @@ interface AllBooksContract {
     }
 
     interface Direction {
-        suspend fun moveToBookInfo()
+        suspend fun moveToBookInfo(book: Book)
     }
 
     interface Intent {
-        object Start : Intent
+        data class BookClick(val book: Book) : Intent
         data class CategoryClick(val category:String):Intent
     }
 }

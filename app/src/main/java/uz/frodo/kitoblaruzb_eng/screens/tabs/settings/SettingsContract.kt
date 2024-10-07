@@ -1,16 +1,15 @@
-package uz.frodo.kitoblaruzb_eng.screens.splash
+package uz.frodo.kitoblaruzb_eng.screens.tabs.settings
 
 import org.orbitmvi.orbit.ContainerHost
 
-interface SplashContract {
+interface SettingsContract {
 
     interface ViewModel : ContainerHost<UIState, SideEffect> {
         fun onEventDispatcher(intent: Intent)
     }
 
     data class UIState(
-        val isLoading: Boolean = false,
-        val isDarkTheme:Boolean = false
+        val isDarkMode: Boolean = false,
     )
 
     sealed interface SideEffect {
@@ -18,12 +17,12 @@ interface SplashContract {
     }
 
     interface Direction {
-        suspend fun moveToWelcome()
-        suspend fun moveToMain()
+//        suspend fun moveToWelcome()
+//        suspend fun moveToMain()
     }
 
     interface Intent {
-//        object GoNext : Intent
+        data class SwitchClick(val isDarkMode: Boolean) : Intent
     }
 }
 

@@ -2,6 +2,7 @@ package uz.frodo.kitoblaruzb_eng.screens.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -17,13 +18,21 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
+import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.hilt.getViewModel
+import cafe.adriel.voyager.transitions.ScreenTransition
+import cafe.adriel.voyager.transitions.SlideTransition
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.frodo.kitoblaruzb_eng.R
 import uz.frodo.kitoblaruzb_eng.ui.theme.KitoblarUzbEngTheme
 
+@OptIn(ExperimentalVoyagerApi::class)
 class SplashScreen :Screen{
+
+
     @Composable
     override fun Content() {
         val viewModel: SplashContract.ViewModel = getViewModel<SplashVM>()
@@ -53,7 +62,9 @@ fun SplashScreenContent(
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.splash_back),
+            painter =  painterResource(
+                id = if(uiState.value.isDarkTheme) R.drawable.splash_back_dark else R.drawable.splash_back
+            ),
             contentDescription = "",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
@@ -62,6 +73,7 @@ fun SplashScreenContent(
         Text(
             text = stringResource(R.string.txt_books),
             style = MaterialTheme.typography.headlineLarge
+                .copy(color = MaterialTheme.colorScheme.secondary)
         )
     }
 }

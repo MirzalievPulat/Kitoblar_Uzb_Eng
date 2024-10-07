@@ -5,12 +5,17 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.core.screen.ScreenKey
+import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import cafe.adriel.voyager.transitions.ScreenTransition
 import uz.frodo.kitoblaruzb_eng.R
 import uz.frodo.kitoblaruzb_eng.ui.theme.KitoblarUzbEngTheme
 
-class SchoolTab:Tab {
+@OptIn(ExperimentalVoyagerApi::class)
+class SchoolTab:Tab{
     override val options: TabOptions
         @Composable
         get() {

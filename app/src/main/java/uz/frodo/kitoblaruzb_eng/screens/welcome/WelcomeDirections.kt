@@ -8,7 +8,7 @@ import javax.inject.Inject
 class WelcomeDirections @Inject constructor(private val appNavigator: AppNavigator) : WelcomeContract.Direction {
 
     override suspend fun moveToMain() {
-        appNavigator.navigateTo(MainScreen())
+        appNavigator.replace(MainScreen())
     }
 
 }

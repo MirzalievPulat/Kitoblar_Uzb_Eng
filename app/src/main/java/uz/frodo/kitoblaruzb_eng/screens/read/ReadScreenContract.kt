@@ -1,8 +1,8 @@
-package uz.frodo.kitoblaruzb_eng.screens.splash
+package uz.frodo.kitoblaruzb_eng.screens.read
 
 import org.orbitmvi.orbit.ContainerHost
 
-interface SplashContract {
+interface ReadScreenContract {
 
     interface ViewModel : ContainerHost<UIState, SideEffect> {
         fun onEventDispatcher(intent: Intent)
@@ -10,7 +10,6 @@ interface SplashContract {
 
     data class UIState(
         val isLoading: Boolean = false,
-        val isDarkTheme:Boolean = false
     )
 
     sealed interface SideEffect {
@@ -18,12 +17,11 @@ interface SplashContract {
     }
 
     interface Direction {
-        suspend fun moveToWelcome()
-        suspend fun moveToMain()
+        suspend fun moveBack()
     }
 
     interface Intent {
-//        object GoNext : Intent
+        object BackClick : Intent
     }
 }
 

@@ -1,5 +1,9 @@
 package uz.frodo.kitoblaruzb_eng.model
 
+import android.os.Parcelable
+import java.io.Serializable
+
+//@Parcelize
 data class Book(
     val id:Long = 0,
     val author: String = "",
@@ -11,4 +15,4 @@ data class Book(
     val summary:String = "",
     val language:String = "English",
     val genre:List<String> = emptyList(),
-)
+):Serializable

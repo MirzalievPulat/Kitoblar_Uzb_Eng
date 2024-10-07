@@ -92,6 +92,7 @@ dependencies {
     //firebase
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-storage")
     implementation("com.google.firebase:firebase-analytics")
 
     //coil
@@ -100,4 +101,12 @@ dependencies {
 
     //sites: https://www.pdfdrive.com/   https://manybooks.net/
 
+    //room
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+
+    //pdf viewer
+    implementation("io.github.afreakyelf:Pdf-Viewer:2.1.1")
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class SplashDirections @Inject constructor(private val appNavigator: AppNavigator) : SplashContract.Direction {
     override suspend fun moveToWelcome() {
-        appNavigator.navigateTo(WelcomeScreen())
+        appNavigator.replace(WelcomeScreen())
     }
 
     override suspend fun moveToMain() {

@@ -1,6 +1,7 @@
 package uz.frodo.kitoblaruzb_eng.screens.welcome
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,14 +27,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
+import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.hilt.getViewModel
+import cafe.adriel.voyager.transitions.FadeTransition
+import cafe.adriel.voyager.transitions.ScreenTransition
+import cafe.adriel.voyager.transitions.SlideTransition
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.frodo.kitoblaruzb_eng.R
+import uz.frodo.kitoblaruzb_eng.ui.components.FadeTransition
 import uz.frodo.kitoblaruzb_eng.ui.theme.KitoblarUzbEngTheme
 import uz.frodo.kitoblaruzb_eng.ui.theme.Main
 
+@OptIn(ExperimentalVoyagerApi::class)
 class WelcomeScreen :Screen{
+
     @Composable
     override fun Content() {
         val viewModel: WelcomeContract.ViewModel = getViewModel<WelcomeVM>()
@@ -58,7 +68,9 @@ fun WelcomeScreenContent(
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
-            painter = painterResource(id = R.drawable.splash_back),
+            painter = painterResource(
+                id = if(uiState.value.isDarkTheme) R.drawable.splash_back_dark else R.drawable.splash_back
+            ),
             contentDescription = "",
             modifier = Modifier
                 .fillMaxSize()
@@ -76,19 +88,22 @@ fun WelcomeScreenContent(
 
             Text(
                 text = stringResource(R.string.txt_welcome),
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyMedium
+                    .copy(color = MaterialTheme.colorScheme.secondary),
                 modifier = Modifier.align(Alignment.Start)
             )
 
             Text(
                 text = stringResource(R.string.txt_welcome_info),
-                style = MaterialTheme.typography.headlineLarge,
+                style = MaterialTheme.typography.headlineLarge
+                    .copy(color = MaterialTheme.colorScheme.secondary),
 
                 )
 
             Text(
                 text = stringResource(R.string.txt_welcome_info2),
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodySmall
+                    .copy(color = MaterialTheme.colorScheme.secondary),
                 modifier = Modifier.padding(top = 16.dp)
             )
 
@@ -101,11 +116,12 @@ fun WelcomeScreenContent(
                     .height(50.dp)
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Main)
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Text(
                     text = stringResource(R.string.txt_next),
-                    style = MaterialTheme.typography.bodyMedium.copy(color = Color.White)
+                    style = MaterialTheme.typography.bodyMedium
+                        .copy(color = MaterialTheme.colorScheme.onPrimary)
                 )
             }
 

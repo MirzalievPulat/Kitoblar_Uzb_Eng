@@ -1,6 +1,8 @@
 package uz.frodo.kitoblaruzb_eng.screens.book_info
 
+import android.health.connect.datatypes.units.Percentage
 import org.orbitmvi.orbit.ContainerHost
+import uz.frodo.kitoblaruzb_eng.model.Book
 
 interface BookInfoContract {
 
@@ -10,6 +12,9 @@ interface BookInfoContract {
 
     data class UIState(
         val isLoading: Boolean = false,
+        val isDownloaded:Boolean = false,
+        val percentage: Int = 0,
+        val book: Book = Book()
     )
 
     sealed interface SideEffect {
@@ -17,10 +22,13 @@ interface BookInfoContract {
     }
 
     interface Direction {
-        suspend fun moveToReadScreen()
+        suspend fun moveToReadScreen(filePath:String)
     }
 
     interface Intent {
-        object Start : Intent
+        data class SetBook(val book: Book): Intent
+        object ReadBook:Intent
+        object DownloadBook:Intent
     }
 }
+
