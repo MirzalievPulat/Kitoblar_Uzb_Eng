@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Kitoblar (Uzb-Eng)</string>
-    <string name="txt_books">kitoblar</string>
+    <string name="txt_books" translatable="false">kitoblar</string>
     <string name="txt_welcome">Welcome</string>
     <string name="txt_welcome_info">Thousand of collections are waiting for you.</string>
     <string name="txt_welcome_info2">Find your soul by exploring our thousands of collections from our library.</string>
@@ -13,7 +13,7 @@
     <string name="txt_play_audio">Play Audio</string>
     <string name="txt_read_book">Read book</string>
     <string name="txt_summary">Summary</string>
-    <string name="txt_lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="txt_lorem" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="txt_next">Next</string>
     <string name="txt_language">"Language: "</string>
     <string name="txt_rating">Rating: </string>
@@ -22,6 +22,14 @@
     <string name="txt_theme">Theme</string>
     <string name="txt_language2">Language</string>
     <string name="txt_info">Info</string>
-    <string name="info">Hi, I am Mirzaliyev Po\'lat from Uzbekistan. I made this app as a homework that was given by \"Gita Academy\". I made this app for learning
-        purposes, not for commercial purposes. Books were taken from the sites below:</string>
+    <string name="info">Hi, I am Mirzaliyev Po\'lat from Uzbekistan. I made this app as a homework that was given by \"Gita Academy\". I made this app for learning         purposes, not for commercial purposes. Books were taken from the sites below:</string>
+    <string name="txt_novel">Novel</string>
+    <string name="txt_adventure">Adventure</string>
+    <string name="txt_mystery">Mystery</string>
+    <string name="txt_fiction">Fiction</string>
+    <string name="txt_history">History</string>
+    <string name="txt_biography">Biography</string>
+    <string name="txt_soon_school">Soon you will be able to read school textbooks</string>
+    <string name="txt_soon_author">Soon you will be able to read books by author</string>
+    <string name="txt_no_internet">No Internet</string>
 </resources>

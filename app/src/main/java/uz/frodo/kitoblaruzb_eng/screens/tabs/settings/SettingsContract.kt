@@ -10,6 +10,7 @@ interface SettingsContract {
 
     data class UIState(
         val isDarkMode: Boolean = false,
+        val currentLang:String = "en"
     )
 
     sealed interface SideEffect {
@@ -23,6 +24,7 @@ interface SettingsContract {
 
     interface Intent {
         data class SwitchClick(val isDarkMode: Boolean) : Intent
+        data class LangChange(val checked:Boolean) : Intent
     }
 }
 

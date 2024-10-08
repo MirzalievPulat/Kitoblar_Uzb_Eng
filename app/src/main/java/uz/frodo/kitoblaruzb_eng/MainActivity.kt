@@ -3,6 +3,7 @@ package uz.frodo.kitoblaruzb_eng
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.lifecycleScope
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
@@ -16,11 +17,13 @@ import kotlinx.coroutines.flow.onEach
 import uz.frodo.kitoblaruzb_eng.repository.shared.LocalStorage
 import uz.frodo.kitoblaruzb_eng.screens.splash.SplashScreen
 import uz.frodo.kitoblaruzb_eng.ui.theme.KitoblarUzbEngTheme
+import uz.frodo.kitoblaruzb_eng.ui.theme.changeAppToDarkMode
+import uz.frodo.kitoblaruzb_eng.utils.NetworkStatusValidator
 import uz.frodo.kitoblaruzb_eng.utils.navigation.NavigationHandler
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var navigationHandler: NavigationHandler
@@ -28,12 +31,20 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var localStorage: LocalStorage
 
+    @Inject
+    lateinit var networkStatusValidator: NetworkStatusValidator
+
     @OptIn(ExperimentalVoyagerApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        networkStatusValidator.listenNetworkStatus({},{})
+
         setContent {
 
-            KitoblarUzbEngTheme(darkTheme = localStorage.isDarkMode) {
+            changeAppToDarkMode(localStorage.isDarkMode)
+
+            KitoblarUzbEngTheme {
                 Navigator(
                     screen = SplashScreen(),
                     disposeBehavior = NavigatorDisposeBehavior(disposeSteps = false)
@@ -45,14 +56,12 @@ class MainActivity : ComponentActivity() {
                             }
                             .launchIn(lifecycleScope)
                     }
-//                    CurrentScreen()
                     SlideTransition(
                         navigator = navigator,
                         disposeScreenAfterTransitionEnd = true
                     )
                 }
             }
-
 
         }
     }

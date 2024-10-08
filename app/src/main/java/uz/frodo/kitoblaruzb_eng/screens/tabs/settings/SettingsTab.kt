@@ -1,5 +1,6 @@
 package uz.frodo.kitoblaruzb_eng.screens.tabs.settings
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -17,8 +20,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,7 +39,7 @@ import uz.frodo.kitoblaruzb_eng.ui.components.HyperLinkText
 import uz.frodo.kitoblaruzb_eng.ui.theme.KitoblarUzbEngTheme
 import uz.frodo.kitoblaruzb_eng.ui.theme.latoFont
 
-class SettingsTab : Tab {
+object SettingsTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
@@ -52,11 +57,8 @@ class SettingsTab : Tab {
         val viewModel: SettingsContract.ViewModel = getViewModel<SettingsVM>()
         val state = viewModel.collectAsState()
 
-        KitoblarUzbEngTheme(
-            darkTheme = state.value.isDarkMode
-        ) {
-            SettingsTabContent(state, viewModel::onEventDispatcher)
-        }
+        SettingsTabContent(state, viewModel::onEventDispatcher)
+
     }
 }
 
@@ -119,12 +121,33 @@ fun SettingsTabContent(
                     .copy(color = MaterialTheme.colorScheme.secondary)
             )
 
-            DarkModeSwitch(
-                checked = uiState.value.isDarkMode,
-                modifier = Modifier,
-                onCheckedChanged = {
-                    onEventDispatcher(SettingsContract.Intent.SwitchClick(it))
-                })
+            Switch(
+                checked = uiState.value.currentLang == "uz",
+                onCheckedChange = {
+                    onEventDispatcher(SettingsContract.Intent.LangChange(it))
+                },
+                thumbContent = {
+                    if (uiState.value.currentLang == "uz") {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_flag_uzs),
+                            contentDescription = ""
+                        )
+                    } else {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_flag_usd),
+                            contentDescription = ""
+                        )
+                    }
+                },
+                colors = SwitchDefaults.colors(
+                    checkedTrackColor = MaterialTheme.colorScheme.onSecondary,
+                    uncheckedTrackColor = MaterialTheme.colorScheme.onSecondary,
+                    checkedThumbColor = Color.Transparent,
+                    uncheckedThumbColor = Color.Transparent,
+                    checkedBorderColor = MaterialTheme.colorScheme.secondary,
+                    uncheckedBorderColor = MaterialTheme.colorScheme.secondary
+                )
+            )
         }
 
         Text(

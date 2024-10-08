@@ -11,6 +11,7 @@ interface AllBooksContract {
 
     data class UIState(
         val isLoading: Boolean = false,
+        val isRefreshing:Boolean = false,
         val allBooks:List<Book> = listOf(Book(rating = 5f),Book(rating = 5f),Book(rating = 5f),Book(),Book(),Book()),
         val categoryBook:List<Book> = listOf(Book(),Book(),Book(),Book(),Book(),Book())
     )

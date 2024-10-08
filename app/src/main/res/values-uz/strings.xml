@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kitoblar (Uzb-Eng)</string>
+    <string name="txt_welcome">Xush kelibsiz</string>
+    <string name="txt_welcome_info">Minglab jamlanmalar sizni kutmoqda</string>
+    <string name="txt_welcome_info2">O\'zingizga mos kitoblarni kutubxonamizdan toping</string>
+    <string name="txt_sign_up">Ro\'yxatdan o\'tish</string>
+    <string name="txt_skip">Tashlab ketish</string>
+    <string name="txt_categories">Kategoryalar</string>
+    <string name="txt_recommended_for_you">Siz uchun tavsiya</string>
+    <string name="txt_best_seller">Eng xaridorgir</string>
+    <string name="txt_all">Barchasi</string>
+    <string name="txt_play_audio">Audio eshitish</string>
+    <string name="txt_read_book">O\'qish</string>
+    <string name="txt_summary">Qisqacha</string>
+    <string name="txt_next">Keyingi</string>
+    <string name="txt_language">Til:</string>
+    <string name="txt_rating">Rating:</string>
+    <string name="txt_pages">Betlar soni:</string>
+    <string name="txt_download_book">Yuklash</string>
+    <string name="txt_theme">Mavzu</string>
+    <string name="txt_language2">Til</string>
+    <string name="txt_info">Ma\'lumot</string>
+    <string name="info">Salom, Men Mirzaliyev Po\'lat O\'zbekistondanman. Bu ilova \"Gita Academy\" da uyga vazifa sifatida berilgan. Bu ilovani o\'rganish maqsadida yasdim, tijorat maqsadida emas. Kitoblar quyidagi saytlardan olingan:</string>
+    <string name="txt_novel">Roman</string>
+    <string name="txt_adventure">Sarguzasht</string>
+    <string name="txt_mystery">Sirli</string>
+    <string name="txt_fiction">Fantastika</string>
+    <string name="txt_history">Tarix</string>
+    <string name="txt_biography">Biografiya</string>
+    <string name="txt_soon_school">Tez orada maktab darsliklarini o\'qishingiz mumkin bo\'ladi</string>
+    <string name="txt_soon_author">Tez orada muallifga tegishli kitoblarni o\'qishingiz mumkin bo\'ladi</string>
+</resources>

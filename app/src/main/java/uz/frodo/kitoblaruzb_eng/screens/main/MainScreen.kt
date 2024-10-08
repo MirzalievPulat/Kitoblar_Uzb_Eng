@@ -1,6 +1,9 @@
 package uz.frodo.kitoblaruzb_eng.screens.main
 
 import android.annotation.SuppressLint
+import android.util.Log
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -19,6 +22,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +35,8 @@ import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
@@ -66,11 +72,11 @@ fun MainScreenPreview() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreenContent() {
-    TabNavigator(tab = AllBooksTab(),
+    TabNavigator(tab = AllBooksTab,
         tabDisposable = {
             TabDisposable(
                 navigator = it,
-                tabs = listOf(AllBooksTab(), SchoolTab(),WriterTab())
+                tabs = listOf(AllBooksTab, SchoolTab,WriterTab)
             )
         }){
         Scaffold(
@@ -94,10 +100,10 @@ fun MainScreenContent() {
                             modifier = Modifier.padding(start = 16.dp)
                         )
 
-                        TabNavigationItem(AllBooksTab())
-                        TabNavigationItem(SchoolTab())
-                        TabNavigationItem(WriterTab())
-                        TabNavigationItem(SettingsTab())
+                        TabNavigationItem(AllBooksTab)
+                        TabNavigationItem(SchoolTab)
+                        TabNavigationItem(WriterTab)
+                        TabNavigationItem(SettingsTab)
                     } 
                     
                     Box(modifier = Modifier
@@ -110,12 +116,40 @@ fun MainScreenContent() {
 
 
         )
+
+
+        val tabNavigator = LocalTabNavigator.current
+        val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+        DisposableEffect(Unit) {
+            val callback = object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (tabNavigator.current != AllBooksTab) {
+                        // Navigate back to the AllBooksTab
+                        tabNavigator.current = AllBooksTab
+                    } else {
+                        // If we are already in the AllBooksTab, invoke the default back press behavior
+                        backDispatcher?.onBackPressed()
+                    }
+                }
+            }
+
+            // Add the back press callback
+            backDispatcher?.addCallback(callback)
+            onDispose {
+                // Remove the back press callback when the composable is disposed
+                callback.remove()
+            }
+        }
+
     }
 }
 
 @Composable
 fun RowScope.TabNavigationItem(tab: Tab) {
     val tabNavigator = LocalTabNavigator.current
+
+    Log.d("TAG", "TabNavigationItem: tab:$tab")
+    Log.d("TAG", "TabNavigationItem: current tab:${tabNavigator.current}")
 
     Column(
         modifier = Modifier

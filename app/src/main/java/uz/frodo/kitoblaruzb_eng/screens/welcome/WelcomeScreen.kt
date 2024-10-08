@@ -16,8 +16,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -106,10 +108,13 @@ fun WelcomeScreenContent(
                     .copy(color = MaterialTheme.colorScheme.secondary),
                 modifier = Modifier.padding(top = 16.dp)
             )
-
+            var lastTime by remember { mutableStateOf(0L) }
             Button(
                 onClick = {
+                    val current = System.currentTimeMillis()
+                    if (current - lastTime < 1500) return@Button
                     onEventDispatcher(WelcomeContract.Intent.Next)
+                    lastTime = current
                 },
                 modifier = Modifier
                     .padding(top = 16.dp)

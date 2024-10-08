@@ -32,8 +32,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -60,20 +62,29 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import org.orbitmvi.orbit.compose.collectAsState
+import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.frodo.kitoblaruzb_eng.R
 import uz.frodo.kitoblaruzb_eng.model.Book
+import uz.frodo.kitoblaruzb_eng.screens.tabs.allbooks.AllBooksContract
 import uz.frodo.kitoblaruzb_eng.ui.components.RatingBar
 import uz.frodo.kitoblaruzb_eng.ui.components.ShimmerEffect
 import uz.frodo.kitoblaruzb_eng.ui.theme.BookEdge
 import uz.frodo.kitoblaruzb_eng.ui.theme.KitoblarUzbEngTheme
 import uz.frodo.kitoblaruzb_eng.ui.theme.Main
+import uz.frodo.kitoblaruzb_eng.utils.showToast
 import kotlin.math.log
 
 @OptIn(ExperimentalVoyagerApi::class)
 class BookInfoScreen(val book: Book) :Screen{
     @Composable
     override fun Content() {
+        val context =  LocalContext.current
         val viewModel:BookInfoContract.ViewModel = getViewModel<BookInfoVM>()
+        viewModel.collectSideEffect {
+            if (it is BookInfoContract.SideEffect.Message) {
+               context.showToast(it.message)
+            }
+        }
 
         viewModel.onEventDispatcher(BookInfoContract.Intent.SetBook(book))
         BookInfoScreenContent(viewModel.collectAsState(),viewModel::onEventDispatcher)
@@ -278,12 +289,17 @@ fun BookInfoScreenContent(
 
                 }
 
+                var lastTime by remember { mutableStateOf(0L) }
                 Button(
                     onClick = {
                         if (uiState.value.isLoading) return@Button
 
                         if (uiState.value.isDownloaded){
+                            val currentTime = System.currentTimeMillis()
+                            if (currentTime - lastTime < 1500) return@Button
+
                             onEventDispatcher(BookInfoContract.Intent.ReadBook)
+                            lastTime = currentTime
                         }else{
                             onEventDispatcher(BookInfoContract.Intent.DownloadBook)
                         }
@@ -301,7 +317,7 @@ fun BookInfoScreenContent(
                         CircularProgressIndicator(
                             progress = {
                                 val p = uiState.value.percentage/100f
-                                if (p == 0f){ 10f }else p
+                                if (p == 0f){ 0.1f }else p
 //                                100f
                             },
                             modifier = Modifier.size(30.dp),
@@ -353,8 +369,14 @@ fun BookInfoScreenContent(
                 .fillMaxWidth()
                 .height(40.dp)
                 .align(Alignment.BottomCenter)
-                .background(brush = Brush.verticalGradient(colors = listOf(Color.Transparent,
-                    MaterialTheme.colorScheme.onSecondary)))
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            MaterialTheme.colorScheme.onSecondary
+                        )
+                    )
+                )
         )
     }
 

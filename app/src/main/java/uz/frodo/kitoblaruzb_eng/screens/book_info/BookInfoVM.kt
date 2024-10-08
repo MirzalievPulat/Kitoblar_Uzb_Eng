@@ -1,9 +1,11 @@
 package uz.frodo.kitoblaruzb_eng.screens.book_info
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onCompletion
@@ -14,15 +16,20 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
+import uz.frodo.kitoblaruzb_eng.R
 import uz.frodo.kitoblaruzb_eng.model.DownloadResult
 import uz.frodo.kitoblaruzb_eng.repository.Repository
 import uz.frodo.kitoblaruzb_eng.repository.room.BookEntity
+import uz.frodo.kitoblaruzb_eng.screens.tabs.allbooks.AllBooksContract
+import uz.frodo.kitoblaruzb_eng.utils.NetworkStatusValidator
 import javax.inject.Inject
 
 @HiltViewModel
 class BookInfoVM @Inject constructor(
     private val directions: BookInfoContract.Direction,
     private val repository: Repository,
+    @ApplicationContext private val context: Context,
+    private val networkStatusValidator: NetworkStatusValidator
 ) : ViewModel(), BookInfoContract.ViewModel {
     private var filePath:String? = null
     override val container = container<BookInfoContract.UIState,
@@ -61,6 +68,9 @@ class BookInfoVM @Inject constructor(
 
             BookInfoContract.Intent.DownloadBook->{
                 Log.d("TAG", "onEventDispatcher: download book vm")
+                if (!networkStatusValidator.isNetworkEnabled)
+                    postSideEffect(BookInfoContract.SideEffect.Message(context.getString(R.string.txt_no_internet)))
+
                 repository.downloadBook(state.book.path)
                     .onStart { reduce { state.copy(isLoading = true) } }
                     .onEach {

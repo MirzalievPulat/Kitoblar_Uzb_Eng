@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -30,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
@@ -43,10 +43,12 @@ import kotlinx.coroutines.launch
 import uz.frodo.kitoblaruzb_eng.R
 import uz.frodo.kitoblaruzb_eng.ui.theme.BlueSky
 import uz.frodo.kitoblaruzb_eng.ui.theme.BorderColor
+import uz.frodo.kitoblaruzb_eng.ui.theme.KitoblarUzbEngTheme
 import uz.frodo.kitoblaruzb_eng.ui.theme.NightSky
+import uz.frodo.kitoblaruzb_eng.ui.theme.Primary
 
 @Composable
-fun DarkModeSwitch(
+fun LanguageSwitch(
     checked: Boolean,
     modifier: Modifier,
     onCheckedChanged: (Boolean) -> Unit) {
@@ -81,7 +83,7 @@ fun DarkModeSwitch(
             .height(switchHeight)
             .clip(RoundedCornerShape(switchHeight))
             .background(lerp(BlueSky, NightSky, offset.value))
-            .border(1.dp, BorderColor, RoundedCornerShape(switchHeight))
+            .border(1.dp, Primary, RoundedCornerShape(switchHeight))
             .toggleable(
                 value = checked,
                 onValueChange = onCheckedChanged,
@@ -90,7 +92,7 @@ fun DarkModeSwitch(
                 indication = null
             )
     ) {
-        val backgroundPainter = painterResource(R.drawable.background)
+        val backgroundPainter = painterResource(R.drawable.lang_back)
         Canvas(modifier = Modifier.fillMaxSize()) {
             with(backgroundPainter) {
                 val scale = size.width / intrinsicSize.width
@@ -121,28 +123,32 @@ fun DarkModeSwitch(
         Box(
             modifier = Modifier
                 .padding(horizontal = handlePadding)
-                .size(handleSize)
+                .size(handleSize + 8.dp)
+                // This controls the position of the handle (flag) on the switch based on the offset value
                 .offset(x = (switchWidth - handleSize - handlePadding * 2f) * offset.value)
-                .paint(painterResource(R.drawable.sun))
                 .clip(CircleShape)
+                .background(Color.White) // Add background to make it more visible
         ) {
+            // Flag image that appears based on the `checked` state
             Image(
-                painter = painterResource(R.drawable.moon),
+                painter = painterResource(if (checked) R.drawable.ic_flag_uzs else R.drawable.ic_flag_usd),
                 contentDescription = null,
                 modifier = Modifier
                     .size(handleSize)
-                    .graphicsLayer {
-                        translationX = size.width * (1f - offset.value)
-                    }
+                    .align(Alignment.Center) // Align the image in the center of the handle
             )
         }
+
     }
 }
 
 @Preview
 @Composable
-fun SwitchPreview() {
+fun LangSwitchPreview() {
 
-    var value by remember { mutableStateOf(true) }
-    DarkModeSwitch(value, Modifier.padding(24.dp)) { value = it }
+    KitoblarUzbEngTheme {
+
+        var value by remember { mutableStateOf(true) }
+        LanguageSwitch(value, Modifier.padding(24.dp)) { value = it }
+    }
 }
