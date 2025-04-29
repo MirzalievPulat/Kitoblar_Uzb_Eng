@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kitoblar (Uzb-Eng)</string>
+    <string name="app_name">Kitoblar</string>
     <string name="txt_books" translatable="false">kitoblar</string>
     <string name="txt_welcome">Welcome</string>
     <string name="txt_welcome_info">Thousand of collections are waiting for you.</string>

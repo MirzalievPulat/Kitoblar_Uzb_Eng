@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kitoblar (Uzb-Eng)</string>
+    <string name="app_name">Kitoblar</string>
     <string name="txt_welcome">Xush kelibsiz</string>
     <string name="txt_welcome_info">Minglab jamlanmalar sizni kutmoqda</string>
     <string name="txt_welcome_info2">O\'zingizga mos kitoblarni kutubxonamizdan toping</string>
@@ -30,4 +30,5 @@
     <string name="txt_biography">Biografiya</string>
     <string name="txt_soon_school">Tez orada maktab darsliklarini o\'qishingiz mumkin bo\'ladi</string>
     <string name="txt_soon_author">Tez orada muallifga tegishli kitoblarni o\'qishingiz mumkin bo\'ladi</string>
+    <string name="txt_no_internet">Internet yo\'q</string>
 </resources>
