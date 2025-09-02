@@ -17,3 +17,4 @@ fun <T> Flow<Result<T>>.onFailure(action: suspend (Throwable) -> Unit): Flow<Res
 fun Context.showToast(message:String){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
+

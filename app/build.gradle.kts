@@ -16,8 +16,8 @@ android {
         applicationId = "uz.polat.kitoblaruzb_eng"
         minSdk = 24
         targetSdk = 35
-        versionCode = 2
-        versionName = "2.0"
+        versionCode = 4
+        versionName = "4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -30,6 +30,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            ndk.debugSymbolLevel = "FULL"
         }
     }
     compileOptions {
@@ -41,6 +42,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     packaging {
@@ -51,6 +53,7 @@ android {
     androidResources{
         generateLocaleConfig = true
     }
+    ndkVersion = "29.0.13113456 rc1"
 }
 
 dependencies {
@@ -99,6 +102,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
 
     //coil
     implementation("io.coil-kt:coil-compose:2.7.0")
@@ -119,5 +124,10 @@ dependencies {
     //acompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.34.0")
 
+    //timber
+    implementation ("com.jakewharton.timber:timber:5.0.1")
+
+    //admob
+    implementation("com.google.android.gms:play-services-ads:24.3.0")
 
 }
